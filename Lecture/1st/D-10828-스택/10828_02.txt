@@ -1,0 +1,82 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+class Stack{
+    int[] s = new int[10000];
+    int top = 0; //삽입될 위치
+
+    void push(int x) {
+        s[top++] = x;
+    }
+
+    int pop() {
+        if(empty()==1) return -1;
+        else return s[--top];
+    }
+
+    int empty() {
+        return top <= 0 ? 1 : 0;
+    }
+
+    int size() {
+        return top;
+    }
+
+    int top() {
+        if(top == 0) return -1;
+        else return s[top-1];
+    }
+}
+
+public class Main {
+    static BufferedReader br;
+    static BufferedWriter bw;
+    static StringTokenizer st;
+
+    static int N;
+
+    public static void main(String[] args) throws Exception {
+        long start = System.currentTimeMillis();
+        System.setIn(new FileInputStream(Main.class.getResource("sample_input.txt").getPath()));
+        br = new BufferedReader(new InputStreamReader(System.in));
+        bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        N = Integer.parseInt(br.readLine());
+        Stack s = new Stack();
+
+        String m;
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            m = st.nextToken();
+            switch (m) {
+            case "push":
+                s.push(Integer.parseInt(st.nextToken()));
+                break;
+            case "pop":
+                bw.write(s.pop()+"\n");
+                break;
+            case "size":
+                bw.write(s.size()+"\n");
+                break;
+            case "empty":
+                bw.write(s.empty()+"\n");
+                break;
+            case "top":
+                bw.write(s.top()+"\n");
+                break;
+            default:
+                break;
+            }
+        }
+
+        long end = System.currentTimeMillis();
+        bw.write("Time="+(end-start)+"ms\n");
+        br.close();
+        bw.flush();
+        bw.close();
+    }
+}

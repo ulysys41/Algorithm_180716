@@ -59,26 +59,30 @@ public class Main {
         D[1] = 0;
         boolean hasNCycle = false;
         int f, t, w;
-        for (int i = 1; i <= N-1; i++) {
+        for (int i = 1; i <= N; i++) {
             for (int j = 0; j < M; j++) {
                 f = edges[j][0];
                 t = edges[j][1];
                 w = edges[j][2];
                 if(D[f] != Integer.MAX_VALUE && D[t] > D[f] + w) {
                     D[t] = D[f] + w;
+					if (i = N) {
+						hasNCycle = true;
+						break;
+					}
                 }
             }
         }
 
-        for (int i = 0; i < M; i++) {
-            f = edges[i][0];
-            t = edges[i][1];
-            w = edges[i][2];
-            if(D[f] != Integer.MAX_VALUE && D[t] > D[f] + w){
-                hasNCycle = true;
-                break;
-            }
-        }
+//        for (int i = 0; i < M; i++) {
+//            f = edges[i][0];
+//            t = edges[i][1];
+//            w = edges[i][2];
+//            if(D[f] != Integer.MAX_VALUE && D[t] > D[f] + w){
+//                hasNCycle = true;
+//                break;
+//            }
+//        }
 
         return hasNCycle;
     }
